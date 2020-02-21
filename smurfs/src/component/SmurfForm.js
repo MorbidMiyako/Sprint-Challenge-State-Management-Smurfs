@@ -1,7 +1,7 @@
 import React, { useState } from "react"
 import { connect } from "react-redux"
 
-import { getData, postData } from "../actions"
+import { getData, postData, updateData } from "../actions"
 //import action
 
 const SmurfForm = props => {
@@ -16,7 +16,6 @@ const SmurfForm = props => {
     setSmurf({
       ...smurf,
       [e.target.name]: e.target.value,
-      id: Date.now()
     });
     console.log(smurf);
   };
@@ -30,44 +29,62 @@ const SmurfForm = props => {
     e.preventDefault()
     props.postData(smurf)
   }
+
+  const handleUpdateData = e => {
+    props.updateData(smurf)
+  }
   return (
     <>
       {props.isFetchingData ? (
         <div> Loading character </div>
       ) : (props.smurfs.length > 0) ? (
-        <form onSubmit={handlePostData}>
-          <div>
-            <label htmlFor="name">New smurf name</label>
-            <input
-              id="name"
-              type="text"
-              name="name"
-              onChange={handleChanges}
-              value={smurf.name}
-            />
-          </div>
-          <div>
-            <label htmlFor="age">New smurf age</label>
-            <input
-              id="age"
-              type="number"
-              name="age"
-              onChange={handleChanges}
-              value={smurf.age}
-            />
-          </div>
-          <div>
-            <label htmlFor="height">New smurf height</label>
-            <input
-              id="height"
-              type="text"
-              name="height"
-              onChange={handleChanges}
-              value={smurf.height}
-            />
-          </div>
-          <button type="submit">Add Smurf</button>
-        </form>
+        <>
+          <form onSubmit={handlePostData}>
+            <div>
+              <label htmlFor="name">New smurf name</label>
+              <input
+                id="name"
+                type="text"
+                name="name"
+                onChange={handleChanges}
+                value={smurf.name}
+              />
+            </div>
+            <div>
+              <label htmlFor="age">New smurf age</label>
+              <input
+                id="age"
+                type="number"
+                name="age"
+                onChange={handleChanges}
+                value={smurf.age}
+              />
+            </div>
+            <div>
+              <label htmlFor="height">New smurf height</label>
+              <input
+                id="height"
+                type="text"
+                name="height"
+                onChange={handleChanges}
+                value={smurf.height}
+              />
+            </div>
+            <button type="submit">Add Smurf</button>
+
+            <div>
+              <label htmlFor="id">Fill in ID of smurf you want to change</label>
+              <input
+                id="id"
+                type="number"
+                name="id"
+                onChange={handleChanges}
+                value={smurf.id}
+              />
+            </div>
+            <button onClick={() => { handleUpdateData(smurf) }} >Update Smurf</button>
+          </form>
+        </>
       ) : (
             <button onClick={handleGetData}> Load Smurfs </button>
           )
@@ -85,7 +102,7 @@ const mapStateToProps = state => {
 
 export default connect(
   mapStateToProps,
-  { getData, postData },
+  { getData, postData, updateData },
 )(SmurfForm)
 /*
 export const postData = (newSmurf) => dispatch => {
