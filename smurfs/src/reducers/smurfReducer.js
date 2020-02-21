@@ -1,14 +1,7 @@
 import { FETCH_DATA, UPDATE_CHARACTER, SET_ERROR } from "../actions";
 
 const initialState = {
-  smurfs: [
-    {
-      name: 'Brainey',
-      age: 200,
-      height: '5cm',
-      id: 0
-    }
-  ]
+  smurfs: []
 };
 
 export const smurfReducer = (state = initialState, action) => {

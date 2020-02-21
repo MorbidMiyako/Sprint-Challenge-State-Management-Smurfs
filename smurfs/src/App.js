@@ -7,6 +7,7 @@ import { smurfReducer as reducer } from "./reducers/smurfReducer"
 // import { characterReducer as reducer } from "./reducers/characterReducer"
 
 import SmurfList from "./component/SmurfList"
+import SmurfForm from "./component/SmurfForm"
 // import CharacterForm from "./components/CharacterForm"
 // import CharacterDiv from "./components/CharacterDiv"
 
@@ -16,7 +17,7 @@ export default function App() {
   console.log(store)
   return (
     <Provider store={store}>
-      {/* <SmurfForm /> */}
+      <SmurfForm />
       <SmurfList />
     </Provider>
   );

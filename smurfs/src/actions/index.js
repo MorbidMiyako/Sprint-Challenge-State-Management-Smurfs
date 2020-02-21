@@ -15,5 +15,14 @@ export const getData = () => dispatch => {
       console.error("error fetching data from api, err: ", err);
       dispatch({ type: SET_ERROR, payload: "Error fetching data from api" });
     });
-  // .post()
 };
+
+export const postData = (newSmurf) => dispatch => {
+  newSmurf.age = Number(newSmurf.age)
+  console.log("newSmurf inside postData", newSmurf)
+  dispatch({ type: POST_DATA })
+  axios
+    .post("http://localhost:3333/smurfs", newSmurf)
+    .then(res => console.log(res))
+    .catch(err => console.log(err))
+}
